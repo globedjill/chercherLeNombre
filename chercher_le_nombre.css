@@ -62,7 +62,10 @@ label, input , button {
 	box-shadow: 0px 0px 12px;
 	margin-right: 40px;
 	margin-left: 40px;
-
+}
+#propos::placeholder
+{
+	font-size: 14px;
 }
 #propos:focus{
 	outline: none;

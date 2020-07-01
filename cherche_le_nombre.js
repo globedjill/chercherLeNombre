@@ -1,12 +1,9 @@
 // générer un nombre aléatoire entre 1 et 100
 var aDeviner = Math.floor(Math.random()*1000)+1;
 console.log(aDeviner);
-var regex = /\d/;
 
 var valider = document.getElementById('valider');
 var propos = document.getElementById('propos');
-var stokPropo = [];
-var cout = 15;
 var reponse = document.getElementById('reponse');
 var suggestions = document.getElementById('suggestions');
 var conteur = document.getElementById('conteur');
@@ -17,17 +14,16 @@ var propos_precInf = document.getElementById('propos_precInf');
 var propos_precSup = document.getElementById('propos_precSup');
 var compteurElt = document.getElementById('timer');
 
-//var interval = setInterval(function(){label.style.backgroundColor = "white";},1000);
+var stokPropo = [];
+var cout = 15;
 
-/*function timer() {
-	var buttonDemarer = document.createElement('button');
-	buttonDemarer.textContent = "Demarrer";
-	buttonDemarer.appendChild(valider);
-
+function timer() {
 	var compteur = Number(compteurElt.textContent);        
     compteurElt.textContent = compteur - 1;
-  	setInterval(timer, 1000);
-	}*/
+    if(compteur === 0){
+    	console.log("vous aver perdu");
+	 }
+    }
 function gameOver() {
 	if (cout === 0 ){
 		//j'affiche un message avec un style
@@ -85,24 +81,21 @@ function reset() {
 function valide() {
 		propos.focus();
 		var propositions = Number(propos.value);
-		//verification de la saisie
-		if (regex.test(propositions)){
-			console.log("test");
-	// - Création et enregistrement des propositions précedente.
+		// - Création et enregistrement des propositions précedente.
 		var propos_prec = document.getElementById('propos_prec');
 		stokPropo.push(propositions);
 		for(i = 0 ; i< stokPropo.length ; i++){
 			propos_prec.textContent = "Proposition précedentes : " + stokPropo + " - " ;
 		}		
-	// - Création de la valeur plus ou moins grand.
+		// - Création de la valeur plus ou moins grand.
 		if (propositions === aDeviner){
 			gagnée();
 			return;
 		} else {
-			label.style.backgroundColor = "rgba(233, 12, 89, 0.42)";
+			label.style.backgroundColor = "rgba(233, 12, 89, 0.12)";
 			if (propositions < aDeviner){
-			propos.style.backgroundColor ="rgba(255, 82, 82, 0.31)";
-	//si proposition et Supérieur
+			//propos.style.backgroundColor ="rgba(255, 82, 82, 0.31)";
+		//si proposition et Supérieur
 			//interval;
 			propos_precSup.textContent = propositions;
 			reponse.textContent = "Faux " + cout +": Essai restant " ;
@@ -112,7 +105,7 @@ function valide() {
 			inf.style.color = "rgba(12, 34, 233, 0.06)";//bleu
 			suggestions.textContent = "Le chiffre est plus grand";
 			} else {
-	//si proposition est Inférieur
+		//si proposition est Inférieur
 				propos.style.backgroundColor = "rgba(255, 82, 82, 0.31)";
 				//interval;
 				propos_precInf.textContent = propositions;
@@ -128,12 +121,20 @@ function valide() {
 		propos.value = "";
 		reponse.textContent = cout + " : Essai";
 		gameOver();
-		}else{ alert('erreur de saisie')};
 		};
+function demarrer(){
+	var parentBoutton = document.getElementById('mepBoutton')
+	var button = document.createElement('button');
+	button.textContent = "Demarrer";
+	parentBoutton.replaceChild(button,valider);
+	button.addEventListener("click",function(){
+		parentBoutton.replaceChild(valider,button);
+		setInterval(timer, 1000);
+	});
+}
 
+demarrer();
 valider.addEventListener("click",valide);
-
 rejouer.addEventListener('click',reset);
-
 reponse.textContent = cout + " : Essai";
 
