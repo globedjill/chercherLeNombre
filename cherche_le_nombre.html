@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+	<head>
+		<script src="https://kit.fontawesome.com/8ee02d9cbc.js" crossorigin="anonymous"></script>
+	    <meta charset="utf-8">
+	    <link rel="stylesheet" href="chercher_le_nombre.css">
+	    <title>Cherche le nombre</title>
+	</head>
+	<body>
+	<h1>Deviner le nombre</h1>
+	<main>
+	    <p>Nous avons générer un nombre aléatoire entre 1 et 1000. Tenter de deviner celui-ci en 10 tentative. Nous vous dirons si le chiffre et trop grand ou trop petit . BONNE CHANCE</p> 
+	    <div id="label">
+	    	<div id="entete">
+	    		<p id="temps">Temps :<span id="timer"> 30</span></p>	
+	    		<h2 name="proposition">Entrer votre proposition</h2>
+			</div>
+		    <div id="mep">
+		    	<div id="mepSup">
+		        	<div id="propos_precSup"></div>
+		    		<div id ="superieur" class="infsup"><i class="fas fa-angle-up"></i></div>
+		    	</div>
+		    	<input type="texte" name ="proposition" id="propos">
+		    	<div id="mepInf">
+			    	<div id ="inferieur" class="infsup"><i class="fas fa-angle-down"></i></div>
+			    	<div id="propos_precInf"></div>
+		    	</div>
+			</div>
+			<div id="reponse"></div>
+			<div id="mepBoutton">
+		    	<button id="valider">Valider</button>
+		    	<button id="rejouer">Rejouer</button>
+		    </div>   
+		</div>
+		<div id="mepReponse">
+		    <div id="propos_prec"></div>
+		    <div id="suggestions"></div>
+		</div>
+	    
+	    <script src="cherche_le_nombre.js"></script>
+	</main>
+	</body>
+</html>
