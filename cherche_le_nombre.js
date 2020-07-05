@@ -1,25 +1,28 @@
 // générer un nombre aléatoire entre 1 et 100
-var aDeviner = Math.floor(Math.random()*1000)+1;
+var aDeviner = Math.floor(Math.random()*100)+1;
 console.log(aDeviner);
 
 var valider = document.getElementById('valider');
 var propos = document.getElementById('propos');
 var reponse = document.getElementById('reponse');
 var suggestions = document.getElementById('suggestions');
-var rejouer = document.getElementById('rejouer');
 var inf = document.getElementById('inferieur');
 var sup = document.getElementById('superieur');
 var propos_precInf = document.getElementById('propos_precInf');
 var propos_precSup = document.getElementById('propos_precSup');
 const form = document.getElementById('form');
 const temps = document.getElementById('timer');
+const compteurElt = document.getElementById('timer');
+var interval = null;
 
 var stokPropo = [];
-var cout = 15;
+var cout = 10;
+
+
 
 function demarrer(){
 	//création du bouton démarrer
-	var parentBoutton = document.getElementById('mepBoutton')
+	var parentBoutton = document.getElementById('form')
 	var button = document.createElement('button');
 	button.textContent = "Demarrer";
 	parentBoutton.replaceChild(button,valider);
@@ -28,9 +31,18 @@ function demarrer(){
 		//-modification du bouton
 		parentBoutton.replaceChild(valider,button);
 		//-Demarrage du timer
-		var interval = setInterval(timer, 1000);
+		interval = setInterval(timer, 1000);
 		});
 	}
+
+function rejouer(){
+	//création du bouton démarrer
+	var parentBoutton = document.getElementById('form')
+	var button = document.createElement('button');
+	button.textContent = "Rejouer";
+	parentBoutton.replaceChild(button,valider);
+	button.addEventListener('click',reset);
+}
 function valide(e) {
 		e.preventDefault();
 		propos.focus();
@@ -45,14 +57,12 @@ function valide(e) {
 		propos_prec.textContent = propString;	
 		// - Création de la valeur plus ou moins grand.
 		if (propositions === aDeviner){
-			gagnée();
+			win();
 			return;
 		} else {
 			label.style.backgroundColor = "rgba(233, 12, 89, 0.12)";
 			if (propositions < aDeviner){
-			//propos.style.backgroundColor ="rgba(255, 82, 82, 0.31)";
 		//si proposition et Supérieur
-			//interval;
 			propos_precSup.textContent = propositions;
 			reponse.textContent = "Faux " + cout +": Essai restant " ;
 			propos_precSup.style.backgroundColor = "rgba(233, 218, 12, 0.9)";
@@ -63,7 +73,6 @@ function valide(e) {
 			} else {
 		//si proposition est Inférieur
 				propos.style.backgroundColor = "rgba(255, 82, 82, 0.31)";
-				//interval;
 				propos_precInf.textContent = propositions;
 				reponse.textContent = "Faux " + cout + ": Essai restant";
 				suggestions.textContent = "Le chiffre est plus petit";
@@ -82,7 +91,6 @@ function valide(e) {
 		};
 function timer() {
 	//je recupere la span du timer
-	var compteurElt = document.getElementById('timer');
 	var compteur = Number(compteurElt.textContent);
 	if (compteur > 0){
 			//Je décremente de 1 a chaque seconde
@@ -90,9 +98,9 @@ function timer() {
 	}else{
 		gameOver();
 		}
+
  	}
 function gameOver() {
-	//if (cout === 0 ){
 		//j'affiche un message avec un style
 		reponse.textContent = "Game Over";
 		label.style.backgroundColor = "red";
@@ -104,32 +112,33 @@ function gameOver() {
 		propos.disabled = true;		
 		//J'active le bouton rejouer
 		rejouer.style.display = "initial";
-		}
-	//};	
-function gagnée () {
+		}	
+function win() {
+		clearInterval(interval);
 		//j'affiche un message de félicitation avec un style
 		reponse.textContent = "Congratulation";
 		label.style.backgroundColor = "rgba(82, 255, 122, 0.34)";
 		reponse.style.color = "white";
 		propos.style.backgroundColor = "rgba(82, 255, 122, 0.34)";
 		//je desactive les entrées
-		valider.disabled = true;
+		//valider.disabled = true;
 		propos.disabled = true;
 		//je supprime le texte
 		suggestions.textContent = "";
 		//j'affiche le boutton rejouer
-		rejouer.style.display = "initial";
+		rejouer();
 		};
 function reset() {
+		demarrer();
 		//réinitialisation des couts et réactivation des entrées
-		cout = 15;
+		cout = 10;
 		reponse.textContent = cout + " : Essai";
 		valider.disabled = false ;
 		propos.disabled = false;
 		//reinitialisation du tableau
 		stokPropo = [];
 		//nouveau chiffre à trouver
-		aDeviner = Math.floor(Math.random()*1000)+1;
+		aDeviner = Math.floor(Math.random()*100)+1;
 		console.log(aDeviner);
 		propos.value = "";
 		propos.focus();
@@ -149,6 +158,4 @@ function reset() {
 
 demarrer();
 form.addEventListener("submit",valide);
-rejouer.addEventListener('click',reset);
-reponse.textContent = cout + " : Essai";
 
