@@ -6,26 +6,93 @@ var valider = document.getElementById('valider');
 var propos = document.getElementById('propos');
 var reponse = document.getElementById('reponse');
 var suggestions = document.getElementById('suggestions');
-var conteur = document.getElementById('conteur');
 var rejouer = document.getElementById('rejouer');
 var inf = document.getElementById('inferieur');
 var sup = document.getElementById('superieur');
 var propos_precInf = document.getElementById('propos_precInf');
 var propos_precSup = document.getElementById('propos_precSup');
-var compteurElt = document.getElementById('timer');
+const form = document.getElementById('form');
+const temps = document.getElementById('timer');
 
 var stokPropo = [];
 var cout = 15;
 
+function demarrer(){
+	//création du bouton démarrer
+	var parentBoutton = document.getElementById('mepBoutton')
+	var button = document.createElement('button');
+	button.textContent = "Demarrer";
+	parentBoutton.replaceChild(button,valider);
+	//Action lors du click sur le boutton 
+	button.addEventListener("click",function(){
+		//-modification du bouton
+		parentBoutton.replaceChild(valider,button);
+		//-Demarrage du timer
+		var interval = setInterval(timer, 1000);
+		});
+	}
+function valide(e) {
+		e.preventDefault();
+		propos.focus();
+		var propositions = Number(propos.value);
+		// - Création et enregistrement des propositions précedente.
+		var propos_prec = document.getElementById('propos_prec');
+		stokPropo.push(propositions);
+		let propString = "Proposition précedentes : ";
+		for(i = 0 ; i< stokPropo.length ; i++){
+			propString += stokPropo[i] + " - " ;
+		}
+		propos_prec.textContent = propString;	
+		// - Création de la valeur plus ou moins grand.
+		if (propositions === aDeviner){
+			gagnée();
+			return;
+		} else {
+			label.style.backgroundColor = "rgba(233, 12, 89, 0.12)";
+			if (propositions < aDeviner){
+			//propos.style.backgroundColor ="rgba(255, 82, 82, 0.31)";
+		//si proposition et Supérieur
+			//interval;
+			propos_precSup.textContent = propositions;
+			reponse.textContent = "Faux " + cout +": Essai restant " ;
+			propos_precSup.style.backgroundColor = "rgba(233, 218, 12, 0.9)";
+			propos_precInf.style.backgroundColor = "rgba(12, 34, 233, 0.06)";
+			sup.style.color = "rgba(233, 218, 12, 0.9)";//jaune
+			inf.style.color = "rgba(12, 34, 233, 0.06)";//bleu
+			suggestions.textContent = "Le chiffre est plus grand";
+			} else {
+		//si proposition est Inférieur
+				propos.style.backgroundColor = "rgba(255, 82, 82, 0.31)";
+				//interval;
+				propos_precInf.textContent = propositions;
+				reponse.textContent = "Faux " + cout + ": Essai restant";
+				suggestions.textContent = "Le chiffre est plus petit";
+				propos_precInf.style.backgroundColor = "rgba(12, 34, 233, 0.9)";
+				propos_precSup.style.backgroundColor = "rgba(233, 218, 12, 0.12)";
+				inf.style.color = "rgba(12, 34, 233, 0.9)";
+				sup.style.color = "rgba(233, 218, 12, 0.12)";
+		}};
+		cout--;
+		propos.focus();
+		propos.value = "";
+		reponse.textContent = cout + " : Essai";
+		if(cout === 0){
+		gameOver();
+			}
+		};
 function timer() {
-	var compteur = Number(compteurElt.textContent);        
-    compteurElt.textContent = compteur - 1;
-    if(compteur === 0){
-    	console.log("vous aver perdu");
-	 }
-    }
+	//je recupere la span du timer
+	var compteurElt = document.getElementById('timer');
+	var compteur = Number(compteurElt.textContent);
+	if (compteur > 0){
+			//Je décremente de 1 a chaque seconde
+		 	compteurElt.textContent = compteur - 1;
+	}else{
+		gameOver();
+		}
+ 	}
 function gameOver() {
-	if (cout === 0 ){
+	//if (cout === 0 ){
 		//j'affiche un message avec un style
 		reponse.textContent = "Game Over";
 		label.style.backgroundColor = "red";
@@ -38,7 +105,7 @@ function gameOver() {
 		//J'active le bouton rejouer
 		rejouer.style.display = "initial";
 		}
-	};
+	//};	
 function gagnée () {
 		//j'affiche un message de félicitation avec un style
 		reponse.textContent = "Congratulation";
@@ -75,66 +142,13 @@ function reset() {
 		propos.style.backgroundColor = "";
 		propos_prec.textContent = "";
 		suggestions.textContent = "";
-		propos_precSup.textContent = "";
-		propos_precInf.textContent = "";
+		propos_precSup.textContent = "0";
+		propos_precInf.textContent = "0";
+		temps.textContent = "30";
 		};
-function valide() {
-		propos.focus();
-		var propositions = Number(propos.value);
-		// - Création et enregistrement des propositions précedente.
-		var propos_prec = document.getElementById('propos_prec');
-		stokPropo.push(propositions);
-		for(i = 0 ; i< stokPropo.length ; i++){
-			propos_prec.textContent = "Proposition précedentes : " + stokPropo + " - " ;
-		}		
-		// - Création de la valeur plus ou moins grand.
-		if (propositions === aDeviner){
-			gagnée();
-			return;
-		} else {
-			label.style.backgroundColor = "rgba(233, 12, 89, 0.12)";
-			if (propositions < aDeviner){
-			//propos.style.backgroundColor ="rgba(255, 82, 82, 0.31)";
-		//si proposition et Supérieur
-			//interval;
-			propos_precSup.textContent = propositions;
-			reponse.textContent = "Faux " + cout +": Essai restant " ;
-			propos_precSup.style.backgroundColor = "rgba(233, 218, 12, 0.9)";
-			propos_precInf.style.backgroundColor = "rgba(12, 34, 233, 0.06)";
-			sup.style.color = "rgba(233, 218, 12, 0.9)";//jaune
-			inf.style.color = "rgba(12, 34, 233, 0.06)";//bleu
-			suggestions.textContent = "Le chiffre est plus grand";
-			} else {
-		//si proposition est Inférieur
-				propos.style.backgroundColor = "rgba(255, 82, 82, 0.31)";
-				//interval;
-				propos_precInf.textContent = propositions;
-				reponse.textContent = "Faux " + cout + ": Essai restant";
-				suggestions.textContent = "Le chiffre est plus petit";
-				propos_precInf.style.backgroundColor = "rgba(12, 34, 233, 0.9)";
-				propos_precSup.style.backgroundColor = "rgba(233, 218, 12, 0.12)";
-				inf.style.color = "rgba(12, 34, 233, 0.9)";
-				sup.style.color = "rgba(233, 218, 12, 0.12)";
-		}};
-		cout--;
-		propos.focus();
-		propos.value = "";
-		reponse.textContent = cout + " : Essai";
-		gameOver();
-		};
-function demarrer(){
-	var parentBoutton = document.getElementById('mepBoutton')
-	var button = document.createElement('button');
-	button.textContent = "Demarrer";
-	parentBoutton.replaceChild(button,valider);
-	button.addEventListener("click",function(){
-		parentBoutton.replaceChild(valider,button);
-		setInterval(timer, 1000);
-	});
-}
 
 demarrer();
-valider.addEventListener("click",valide);
+form.addEventListener("submit",valide);
 rejouer.addEventListener('click',reset);
 reponse.textContent = cout + " : Essai";
 

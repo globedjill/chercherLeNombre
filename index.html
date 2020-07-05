@@ -11,26 +11,28 @@
 	<main>
 	    <p>Nous avons générer un nombre aléatoire entre 1 et 1000. Tenter de deviner celui-ci en 15 tentative. Nous vous dirons si le chiffre et trop grand ou trop petit . BONNE CHANCE</p> 
 	    <div id="label">
-	    	<div id="entete">
-	    		<p id="temps">Temps :<span id="timer"> 30</span></p>	
-	    		<h2 name="proposition">Entrer votre proposition</h2>
-			</div>
-		    <div id="mep">
-		    	<div id="mepSup">
-		        	<div id="propos_precSup">0</div>
-		    		<div id ="superieur" class="infsup"><i class="fas fa-angle-up"></i></div>
-		    	</div>
-		    	<input type="number" name ="proposition" id="propos" placeholder="Entrer un chiffre entre 1 et 1000">
-		    	<div id="mepInf">
-			    	<div id ="inferieur" class="infsup"><i class="fas fa-angle-down"></i></div>
-			    	<div id="propos_precInf">1000</div>
-		    	</div>
-			</div>
-			<div id="reponse"></div>
-			<div id="mepBoutton">
-		    	<button id="valider">Valider</button>
-		    	<button id="rejouer">Rejouer</button>
-		    </div>   
+			<form id='form'>
+		    	<div id="entete">
+		    		<p id="temps">Temps : <span id="timer">30</span></p>	
+		    		<h2 name="proposition">Entrer votre proposition</h2>
+				</div>
+			    <div id="mep">
+			    	<div id="mepSup">
+			        	<div id="propos_precSup">0</div>
+			    		<div id ="superieur" class="infsup"><i class="fas fa-angle-up"></i></div>
+			    	</div>
+			    	<input type="number" name ="proposition" id="propos" placeholder="Entrer un chiffre entre 1 et 1000">
+			    	<div id="mepInf">
+				    	<div id ="inferieur" class="infsup"><i class="fas fa-angle-down"></i></div>
+				    	<div id="propos_precInf">1000</div>
+			    	</div>
+				</div>
+				<div id="reponse"></div>
+				<div id="mepBoutton">
+			    	<button id="valider">Valider</button>
+			    	<button id="rejouer">Rejouer</button>
+			    </div> 
+		    </form>  
 		</div>
 		<div id="mepReponse">
 		    <div id="propos_prec"></div>
