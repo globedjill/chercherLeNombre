@@ -19,30 +19,20 @@ var stokPropo = [];
 var cout = 10;
 
 
-
 function demarrer(){
 	//création du bouton démarrer
-	var parentBoutton = document.getElementById('form')
-	var button = document.createElement('button');
-	button.textContent = "Demarrer";
-	parentBoutton.replaceChild(button,valider);
+	var parentBoutton = document.getElementById('form');
+	var button1 = document.createElement('button');
+	button1.textContent = "Demarrer";
+	parentBoutton.replaceChild(button1,valider);
 	//Action lors du click sur le boutton 
-	button.addEventListener("click",function(){
+	button1.addEventListener("click",function(){
 		//-modification du bouton
-		parentBoutton.replaceChild(valider,button);
+		parentBoutton.replaceChild(valider,button1);
 		//-Demarrage du timer
 		interval = setInterval(timer, 1000);
 		});
 	}
-
-function rejouer(){
-	//création du bouton démarrer
-	var parentBoutton = document.getElementById('form')
-	var button = document.createElement('button');
-	button.textContent = "Rejouer";
-	parentBoutton.replaceChild(button,valider);
-	button.addEventListener('click',reset);
-}
 function valide(e) {
 		e.preventDefault();
 		propos.focus();
@@ -101,6 +91,7 @@ function timer() {
 
  	}
 function gameOver() {
+		clearInterval(interval);
 		//j'affiche un message avec un style
 		reponse.textContent = "Game Over";
 		label.style.backgroundColor = "red";
@@ -111,8 +102,9 @@ function gameOver() {
 		valider.disabled = true;
 		propos.disabled = true;		
 		//J'active le bouton rejouer
-		rejouer.style.display = "initial";
+		rejouer();
 		}	
+
 function win() {
 		clearInterval(interval);
 		//j'affiche un message de félicitation avec un style
@@ -121,15 +113,26 @@ function win() {
 		reponse.style.color = "white";
 		propos.style.backgroundColor = "rgba(82, 255, 122, 0.34)";
 		//je desactive les entrées
-		//valider.disabled = true;
+		valider.disabled = true;
 		propos.disabled = true;
 		//je supprime le texte
 		suggestions.textContent = "";
-		//j'affiche le boutton rejouer
-		rejouer();
+			//j'affiche le boutton rejouer
+			rejouer();
 		};
+function rejouer(){
+	//creation d'un bouton rejouer qui remplace le bouton valider
+	var parentBoutton = document.getElementById('form');
+	var rejouer = document.createElement('button');
+	rejouer.textContent = 'Rejouer';
+	parentBoutton.replaceChild(rejouer,valider);
+	//Action lors du click sur le bouton
+	rejouer.addEventListener('click',function(){
+		parentBoutton.replaceChild(valider,rejouer);
+		reset();
+		});
+	}
 function reset() {
-		demarrer();
 		//réinitialisation des couts et réactivation des entrées
 		cout = 10;
 		reponse.textContent = cout + " : Essai";
@@ -142,9 +145,7 @@ function reset() {
 		console.log(aDeviner);
 		propos.value = "";
 		propos.focus();
-		//je cacher le bouton rejouer
-		rejouer.style.display = "none";
-		//reinitialisation de toutes les styles et valeur précedentes 
+		//reinitialisation de tous les styles et valeur précedentes.
 		reponse.style.fontSize = "";
 		label.style.backgroundColor = "";
 		reponse.style.color = "";
@@ -154,6 +155,7 @@ function reset() {
 		propos_precSup.textContent = "0";
 		propos_precInf.textContent = "0";
 		temps.textContent = "30";
+		demarrer();
 		};
 
 demarrer();
