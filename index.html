@@ -7,6 +7,10 @@
 	    <title>Cherche le nombre</title>
 	</head>
 	<body>
+	<header>
+		<div id='seConnecter'></div>
+	</header>
+
 	<h1>Deviner le nombre</h1>
 	<main>
 	    <p>Nous avons générer un nombre aléatoire entre 1 et 100. Tenter de deviner celui-ci en 10 tentative. Nous vous dirons si le chiffre et trop grand ou trop petit . BONNE CHANCE</p> 
@@ -15,6 +19,9 @@
 		    	<div id="entete">
 		    		<h2 name="proposition">Entrer votre proposition</h2>
 		    		<p id="temps">Temps : <span id="timer">30</span></p>
+		    		<div id='chrono'>
+		    			<div id='reduction'></div>
+		    		</div>
 				</div>
 
 			    <div id="mep">
@@ -39,7 +46,8 @@
 		    <div id="propos_prec"></div>
 		    <div id="suggestions"></div>
 		</div>
-	    
+
+	    <script src="requete.js"></script>
 	    <script src="cherche_le_nombre.js"></script>
 	</main>
 	</body>

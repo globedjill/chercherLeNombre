@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+	<head>
+		<script src="https://kit.fontawesome.com/8ee02d9cbc.js" crossorigin="anonymous"></script>
+	    <meta charset="utf-8">
+	    <link rel="stylesheet" href="chercher_le_nombre.css">
+	    <title>Cherche le nombre</title>
+	</head>
+	<body>
+		<header>
+			<h1>Inscription</h1>
+		</header>
+		<main id='mepForm'>
+			<form>
+				<fieldset>
+					<legend>Identité</legend>
+						<div class='ligne'>
+							<label name='nom'>Entrer votre Nom</label>
+							<div id='ligneJs' class='column'>
+								<input type="text" name="nom" id='nom' value="" placeholder="Deux caractéres minimum" class='bouttonI'>
+								<p id="information">Entrée votre nom au format alphabétique </p>
+							</div>
+						</div>
+
+						<div class='ligne'>
+							<label name='prenom'>Entrer votre prénom</label>
+							<input type="text" name="prenom" id='prenom' placeholder="Deux caractéres minimum" class="bouttonI">
+						</div>
+
+						<div class='ligne'>
+							<label name='date'>Date de naissance</label>
+							<input type="date" name="date" id='date'>
+						</div>
+
+						<div class='ligne'>
+							<label name='pays'>Votre région</label>
+							<select name="pays" id='pays'>
+								<option value="">--- Choisir une option ---</option>
+								<option value="France">France</option>
+								<option value="Autre">Autre</option>
+							</select>
+						</div>
+				</fieldset>
+
+				<fieldset>
+					<legend>Identifiant de connexion</legend>
+						<div class='ligne'>
+								<label name='pseudo'>Votre pseudo</label>
+								<input type="text" name="pseudo" id='pseudo' placeholder='Quatre caractéres minimun' class="bouttonI">
+							</div>
+
+						<div class='ligne'>
+							<label name='password'>Mot de passe</label>
+							<input type="password" name="password" id='password' placeholder='Six caractéres minimun'class="bouttonI">
+						</div>
+
+						<div class='ligne'>
+							<label name='password'>Confirmation mot de passe</label>
+							<input type="password" name="password" id='password' placeholder='retaper votre motde passe'>
+						</div>
+				</fieldset>
+
+				<fieldset>
+					<legend>Identifiant du contact</legend>
+						<div class='ligne'>
+							<label name='mail'>Votre mail</label>
+							<input type="mail" name="mail" id='mail'placeholder='Au format : monmail@site.fr'>
+						</div>
+
+						<div class='ligne'>
+							<label name='verifMail'>Confirmation de Votre mail</label>
+							<input type="text" name="verifMail" id='verifMail'>
+						</div>
+
+						<div class='ligne start'>
+							<div class='column'>
+								<div class='ligne start' >
+									<input type="checkbox" name="note" id='note' checked="true" class='start2'>
+									<label name='note'>Je souhaite recevoir les newsletters</label>
+								</div>
+
+								<div class='ligne start'>
+									<input type="checkbox" name="legacy" id='legacy' class="start2">
+									<label name='legacy'>J'accepte les mentions légales</label>
+								</div>
+							</div>
+						</div>
+				</fieldset>
+
+				<input type="submit" value="Je m'inscris" id='envoyer'>
+
+				<script src="requete.js"></script>
+				<script src="validationFormulaireInscription.js"></script>
+		
+			</form>
+		</main>
+	</body>

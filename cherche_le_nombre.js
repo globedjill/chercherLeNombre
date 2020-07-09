@@ -31,6 +31,7 @@ function demarrer(){
 		parentBoutton.replaceChild(valider,button1);
 		//-Demarrage du timer
 		interval = setInterval(timer, 1000);
+		animatedId = requestAnimationFrame(deplacerBloc);
 		});
 	}
 function valide(e) {
@@ -90,6 +91,26 @@ function timer() {
 		}
 
  	}
+function deplacerBloc(){
+	//recuperation du bloc temps
+	var deplacement = document.getElementById('reduction');
+	var chrono = document.getElementById('chrono');
+	var vitesse = 0.065;
+	//recuperation de la largeur du bloc
+	var largeurBloc = parseFloat(getComputedStyle(deplacement).width);
+	var animatedId = null;
+	//convertion du bloc en nombre
+	var xBloc = parseFloat(getComputedStyle(deplacement).left);
+	var xMax = parseFloat(getComputedStyle(chrono).width);
+	if(xBloc + vitesse <= xMax){
+		//deplacement
+		deplacement.style.left = (xBloc + vitesse) + 'px';
+		//demande au navigateur d'appeller la fonction dés que la function démarrer et activé	
+		animatedId = requestAnimationFrame(deplacerBloc);
+		}else{
+			cancelAnimationFrame(animatedId);
+		}
+	}
 function gameOver() {
 		clearInterval(interval);
 		//j'affiche un message avec un style
@@ -104,7 +125,6 @@ function gameOver() {
 		//J'active le bouton rejouer
 		rejouer();
 		}	
-
 function win() {
 		clearInterval(interval);
 		//j'affiche un message de félicitation avec un style
@@ -161,3 +181,13 @@ function reset() {
 demarrer();
 form.addEventListener("submit",valide);
 
+
+//Bouton se connecter
+var seConnecter = document.getElementById('seConnecter');
+window.addEventListener('load',function(){
+	var lien = document.createElement('a');
+	lien.href = "sEnregistrer.html";
+	lien.textContent = 'Se connecter';
+	console.log(lien);
+	seConnecter.appendChild(lien);
+	});

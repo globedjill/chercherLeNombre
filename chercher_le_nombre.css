@@ -42,11 +42,17 @@ label, input , button {
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-between;
-	height: 430px;
+	height: 470px;
 	border:1px solid black;
 	box-shadow: 2px 2px 12px;
 	padding: 10px;
 	}
+#envoyer{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin:20px;
+}
 #rejouer{
 	margin-top: 20px;
 	}
@@ -129,3 +135,73 @@ main{
 #propos_precInf{
 	background-color:rgba(12, 34, 233, 0.06)
 	}
+#chrono{
+	border-radius: 50px;
+	box-shadow: 0px 0px 12px rgba(159, 5, 255, 0.43);
+	width: 120px;
+	height: 20px;
+	margin-bottom: 20px;
+	}
+#reduction{
+	width: 5px;
+	height: 20px;
+	background-color: red;
+	position: relative;
+	left: 0px;
+	}
+#seConnecter{
+	font-size: 23px;
+	margin:20px 0;
+	text-align: center;
+	border:1px solid black;
+	}
+
+#mepForm{
+	display: flex;
+	flex-direction: column;
+	}
+.ligne{
+	margin:15px 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.column{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+.start{
+	justify-content: flex-start;
+}
+select , input{
+	width: 238px;
+	height: 35px;
+	font-size: 20px;
+}
+.start2{
+	display: flex;
+	justify-content: flex-start;
+}
+input::placeholder{
+	font-size: 12px;
+}
+
+fieldset{
+	margin-top:10px;
+	background-color: rgba(25, 0, 255, 0.04);/*bleu trés pale*/
+	color:rgba(0, 0, 0, 0.6);/*gris pale*/
+}
+legend{
+	background-color: rgba(0, 0, 0, 0.29);/*gris pale*/
+	color:white;
+	padding-right: 10px;
+	padding-left: 10px;
+	border:1px solid black;
+	font-style: italic;
+	font-size: 24px;
+}
+#information{
+	display:none;
+	font-size: 10px;
+}
