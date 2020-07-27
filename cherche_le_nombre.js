@@ -100,11 +100,11 @@ function deplacerBloc(){
 	var largeurBloc = parseFloat(getComputedStyle(deplacement).width);
 	var animatedId = null;
 	//convertion du bloc en nombre
-	var xBloc = parseFloat(getComputedStyle(deplacement).left);
+	var xBloc = parseFloat(getComputedStyle(deplacement).width);
 	var xMax = parseFloat(getComputedStyle(chrono).width);
 	if(xBloc + vitesse <= xMax){
 		//deplacement
-		deplacement.style.left = (xBloc + vitesse) + 'px';
+		deplacement.style.width = (xBloc + vitesse) + 'px';
 		//demande au navigateur d'appeller la fonction dés que la function démarrer et activé	
 		animatedId = requestAnimationFrame(deplacerBloc);
 		}else{
